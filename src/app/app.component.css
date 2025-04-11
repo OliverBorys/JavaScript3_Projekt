@@ -1,0 +1,13 @@
+header {
+  padding: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  margin-right: 1rem;
+  background-color: grey;
+  border-radius: 5px;
+  padding: 5px;
+}
