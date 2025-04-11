@@ -5,6 +5,7 @@ import { SortDropdownComponent } from '../../components/product/sort-dropdown/so
 import { ProductGridComponent } from '../../components/product/product-grid/product-grid.component';
 import { filterProducts, sortProducts } from '../../utils/filter-utils';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -26,9 +27,18 @@ export class ShopComponent {
   sort: string = 'newest';
   query: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.query = params['q'] || '';
+      this.selectedCategory = params['category'] || '';
+    });
+
     this.http.get<any[]>('/api/products').subscribe(data => this.products = data);
     this.http.get<any[]>('/api/categories').subscribe(data => this.categories = data);
   }
@@ -43,11 +53,16 @@ export class ShopComponent {
   }
 
   onCategoryChange(newCategory: string) {
-    this.selectedCategory = newCategory;
+    this.router.navigate([], {
+      queryParams: {
+        ...this.route.snapshot.queryParams,
+        category: newCategory || null
+      },
+      queryParamsHandling: 'merge'
+    });
   }
 
   onLikeToggled() {
-    // Trigger re-filter by shallow copying the array
     this.products = [...this.products];
   }
 }
