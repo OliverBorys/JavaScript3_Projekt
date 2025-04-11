@@ -1,1 +1,18 @@
-<p>category-grid works!</p>
+<section class="category-grid">
+  <div class="category-grid-wrapper">
+    <div
+      *ngFor="let category of categories"
+      class="category-item"
+      (click)="handleCategoryClick(category.name)"
+    >
+      <img
+        [src]="category.img"
+        [alt]="category.name"
+        class="category-image"
+      />
+      <div class="category-overlay">
+        {{ category.name }}
+      </div>
+    </div>
+  </div>
+</section>

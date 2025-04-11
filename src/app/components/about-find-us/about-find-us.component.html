@@ -1,1 +1,18 @@
-<p>about-find-us works!</p>
+<section class="about-find-us">
+  <div class="about-find-us-grid">
+    <div
+      *ngFor="let section of sections"
+      class="about-find-us-item"
+      (click)="handleClick(section)"
+    >
+      <img
+        [src]="section.img"
+        [alt]="section.name"
+        class="about-find-us-image"
+      />
+      <div class="about-find-us-overlay">
+        {{ section.name }}
+      </div>
+    </div>
+  </div>
+</section>
