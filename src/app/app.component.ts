@@ -14,8 +14,8 @@ export class AppComponent {
   title = 'client';
 
 constructor(private http: HttpClient) {
-  this.http.get('/api/products').subscribe(tasks => {
-    console.log(tasks);
+  this.http.get('/api/products').subscribe(products => {
+    console.log(products);
   });
 }
 }
