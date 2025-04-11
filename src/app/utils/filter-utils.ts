@@ -1,0 +1,29 @@
+export function filterProducts(products: any[] = [], query: string, selectedCategory: string): any[] {
+  if (!Array.isArray(products)) {
+    console.error("Error: products is not an array", products);
+    return [];
+  }
+
+  const lowerQuery = query?.toLowerCase() || '';
+
+  return products.filter(product => {
+    const matchesQuery = !query || product?.productName?.toLowerCase().includes(lowerQuery);
+    const matchesCategory = !selectedCategory || product?.categoryName?.toLowerCase() === selectedCategory.toLowerCase();
+    return matchesQuery && matchesCategory;
+  });
+}
+
+export function sortProducts(products: any[] = [], sort: string): any[] {
+  if (!Array.isArray(products)) {
+    console.error("Error: products is not an array", products);
+    return [];
+  }
+
+  return [...products].sort((a, b) => {
+    if (sort === 'newest') return new Date(b.publishingDate).getTime() - new Date(a.publishingDate).getTime();
+    if (sort === 'oldest') return new Date(a.publishingDate).getTime() - new Date(b.publishingDate).getTime();
+    if (sort === 'highest') return b.price - a.price;
+    if (sort === 'lowest') return a.price - b.price;
+    return 0;
+  });
+}

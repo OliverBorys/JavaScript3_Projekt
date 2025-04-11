@@ -13,6 +13,7 @@ import { NoProductsFoundComponent } from '../no-products-found/no-products-found
 export class ProductGridComponent {
   @Input() products: any[] = [];
   @Input() query: string = '';
+  @Input() gridClass: string = '';
   @Output() likeToggled = new EventEmitter<void>();
 
   get visibleProducts(): any[] {
