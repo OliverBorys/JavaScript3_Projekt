@@ -1,0 +1,7 @@
+.no-results {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
