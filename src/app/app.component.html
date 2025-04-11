@@ -1,9 +1,10 @@
 <body>
   <header>
- <nav>
-    <a [routerLink]="['/contact']" class="nav-link">Contact</a>
-    <a [routerLink]="['/about']" class="nav-link">About</a>
- </nav>
+    <nav>
+      <a [routerLink]="['']" class="nav-link">Home</a>
+      <a [routerLink]="['/contact']" class="nav-link">Contact</a>
+      <a [routerLink]="['/about']" class="nav-link">About</a>
+    </nav>
   </header>
   <main class="main">
     <router-outlet></router-outlet>
