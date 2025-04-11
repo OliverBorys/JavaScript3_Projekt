@@ -1,0 +1,22 @@
+<section class="shop-wrapper">
+  <h2 class="search-title">Search results for: "{{ query }}"</h2>
+
+  <div class="shop-controls">
+    <app-category-filter
+      [categories]="categories"
+      [selectedCategory]="selectedCategory"
+      (categoryChange)="onCategoryChange($event)"
+    ></app-category-filter>
+
+    <app-sort-dropdown
+      [sort]="sort"
+      (sortChange)="onSortChange($event)"
+    ></app-sort-dropdown>
+  </div>
+
+  <app-product-grid
+    [products]="filteredAndSortedProducts"
+    [query]="query"
+    (likeToggled)="onLikeToggled()"
+  ></app-product-grid>
+</section>
