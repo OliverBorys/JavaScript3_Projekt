@@ -1,21 +1,35 @@
-export function filterProducts(products: any[] = [], query: string, selectedCategory: string): any[] {
+import { getLikedProducts } from './local-storage-utils';
+
+export function filterProducts(
+  products: any[] = [],
+  query: string,
+  selectedCategory: string
+): any[] {
   if (!Array.isArray(products)) {
-    console.error("Error: products is not an array", products);
+    console.error('Error: products is not an array', products);
     return [];
   }
 
   const lowerQuery = query?.toLowerCase() || '';
 
-  return products.filter(product => {
-    const matchesQuery = !query || product?.productName?.toLowerCase().includes(lowerQuery);
-    const matchesCategory = !selectedCategory || product?.categoryName?.toLowerCase() === selectedCategory.toLowerCase();
+  if (selectedCategory === 'favorites') {
+    const liked = getLikedProducts();
+    return products.filter((product) => liked.includes(product.id));
+  }
+
+  return products.filter((product) => {
+    const matchesQuery =
+      !query || product?.productName?.toLowerCase().includes(lowerQuery);
+    const matchesCategory =
+      !selectedCategory ||
+      product?.categoryName?.toLowerCase() === selectedCategory.toLowerCase();
     return matchesQuery && matchesCategory;
   });
 }
 
 export function sortProducts(products: any[] = [], sort: string): any[] {
   if (!Array.isArray(products)) {
-    console.error("Error: products is not an array", products);
+    console.error('Error: products is not an array', products);
     return [];
   }
 

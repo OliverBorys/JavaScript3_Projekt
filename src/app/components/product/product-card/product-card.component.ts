@@ -30,6 +30,7 @@ export class ProductCardComponent {
 
   onLikeClick(event: MouseEvent): void {
     event.preventDefault();
+    event.stopPropagation();
     const updatedLikes = toggleLikeProduct(this.product.id);
     this.liked = updatedLikes.includes(this.product.id);
     this.likeToggled.emit();

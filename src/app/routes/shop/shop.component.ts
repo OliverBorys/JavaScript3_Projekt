@@ -47,6 +47,7 @@ export class ShopComponent {
   }
 
   onLikeToggled() {
-    // re-trigger filtering if needed
+    // Trigger re-filter by shallow copying the array
+    this.products = [...this.products];
   }
 }
