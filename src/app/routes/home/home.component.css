@@ -1,0 +1,17 @@
+.trending {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.trending h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.home-sections {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
