@@ -31,9 +31,18 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id) {
+        this.id = id;
+        this.fetchProduct(id);
+      }
+    });
+  }
 
-    this.http.get(`/api/products/${this.id}`).subscribe({
+  fetchProduct(id: string): void {
+    this.loading = true;
+    this.http.get(`/api/products/${id}`).subscribe({
       next: (res) => {
         this.product = res;
         this.loading = false;
