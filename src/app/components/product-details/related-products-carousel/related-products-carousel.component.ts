@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -28,6 +28,7 @@ export class RelatedProductsCarouselComponent implements OnInit {
   loading = true;
   error = '';
   currentIndex = 0;
+  slidesPerView = 2;
 
   constructor(
     private http: HttpClient,
@@ -37,7 +38,22 @@ export class RelatedProductsCarouselComponent implements OnInit {
   ngOnInit(): void {
     const id = this.currentId ?? +this.route.snapshot.paramMap.get('id')!;
     this.fetchProducts(id);
+    this.updateSlidesPerView();
   }
+
+  @HostListener('window:resize', [])
+  onResize(): void {
+    this.updateSlidesPerView();
+  }
+
+  updateSlidesPerView(): void {
+    const width = window.innerWidth;
+    if (width >= 1024) this.slidesPerView = 4;
+    else if (width >= 768) this.slidesPerView = 3;
+    else if (width >= 500) this.slidesPerView = 2;
+    else this.slidesPerView = 2;
+  }
+
 
   fetchProducts(id: number): void {
     this.http.get<Product[]>('/api/products').subscribe({
@@ -63,31 +79,28 @@ export class RelatedProductsCarouselComponent implements OnInit {
   }
 
   slideNext(): void {
-    if (this.canSlideNext()) {
+    const maxIndex = Math.max(0, this.filteredProducts.length - this.slidesPerView);
+    if (this.currentIndex >= maxIndex) {
+      this.currentIndex = 0;
+    } else {
       this.currentIndex++;
     }
   }
 
   slidePrev(): void {
-    if (this.canSlidePrev()) {
+    const maxIndex = Math.max(0, this.filteredProducts.length - this.slidesPerView);
+    if (this.currentIndex <= 0) {
+      this.currentIndex = maxIndex;
+    } else {
       this.currentIndex--;
     }
   }
 
   canSlideNext(): boolean {
-    const slidesPerView = this.getSlidesPerView();
-    return this.currentIndex < this.filteredProducts.length - slidesPerView;
+    return this.currentIndex < this.filteredProducts.length - this.slidesPerView;
   }
 
   canSlidePrev(): boolean {
     return this.currentIndex > 0;
-  }
-
-  getSlidesPerView(): number {
-    const width = window.innerWidth;
-    if (width >= 1024) return 4;
-    if (width >= 768) return 3;
-    if (width >= 500) return 2;
-    return 2;
   }
 }
