@@ -1,6 +1,6 @@
 <main class="product-details-wrapper">
   <ng-container *ngIf="loading; else content">
-    <p class="text-center">Loading...</p>
+    <p class="loading">Loading...</p>
   </ng-container>
 
   <ng-template #content>
@@ -9,6 +9,11 @@
         <app-product-image [product]="product"></app-product-image>
         <app-product-info [product]="product"></app-product-info>
       </div>
+      <app-related-products-carousel
+        [currentId]="product.id"
+        [categoryId]="product.categoryId"
+        class="product-swiper"
+      ></app-related-products-carousel>
     </ng-container>
 
     <ng-template #notFound>

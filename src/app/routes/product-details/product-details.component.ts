@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductImageComponent } from '../../components/product-details/product-image/product-image.component';
 import { ProductInfoComponent } from '../../components/product-details/product-info/product-info.component';
 import { MissingProductComponent } from '../../components/product-details/missing-product/missing-product.component';
+import { RelatedProductsCarouselComponent } from '../../components/product-details/related-products-carousel/related-products-carousel.component';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { MissingProductComponent } from '../../components/product-details/missin
     RouterModule,
     ProductImageComponent,
     ProductInfoComponent,
+    RelatedProductsCarouselComponent,
     MissingProductComponent
   ]
 })
