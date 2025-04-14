@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   background: none;
   border: none;
@@ -20,11 +20,11 @@
 }
 
 .accordion-title {
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .accordion-icon {
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .accordion-content {
@@ -32,6 +32,6 @@
   margin-top: 0.5rem;
   border-top: 1px solid #ccc;
   color: #333;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   line-height: 1.5;
 }
