@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ProductImageComponent } from '../../components/product-details/product-image/product-image.component';
 import { ProductInfoComponent } from '../../components/product-details/product-info/product-info.component';
 import { MissingProductComponent } from '../../components/product-details/missing-product/missing-product.component';
-import { ProductSwiperComponent } from '../../components/product-details/product-swiper/product-swiper.component';
 
 
 @Component({
@@ -15,9 +14,9 @@ import { ProductSwiperComponent } from '../../components/product-details/product
   styleUrls: ['./product-details.component.css'],
   imports: [
     CommonModule,
+    RouterModule,
     ProductImageComponent,
     ProductInfoComponent,
-    ProductSwiperComponent,
     MissingProductComponent
   ]
 })
