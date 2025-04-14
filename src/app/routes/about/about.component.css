@@ -12,6 +12,7 @@
 .about-intro {
   margin: 2rem;
   text-align: center;
+  font-size: 1.1rem;
 }
 
 .about-intro h2 {
@@ -19,7 +20,6 @@
   font-weight: 500;
 }
 
-/* === SECTIONS (each AboutSection) === */
 .about-sections {
   display: flex;
   flex-direction: column;

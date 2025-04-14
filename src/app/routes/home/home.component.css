@@ -4,9 +4,11 @@
 }
 
 .trending h2 {
-  font-size: 1.75rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #2d2d2d;
+  margin: 1rem 0 3rem 0;
 }
 
 .home-sections {

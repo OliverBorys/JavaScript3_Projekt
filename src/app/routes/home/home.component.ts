@@ -42,6 +42,5 @@ export class HomeComponent implements OnInit {
   }
 
   onLikeToggled() {
-    // update if needed
   }
 }

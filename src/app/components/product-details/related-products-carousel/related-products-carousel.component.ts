@@ -83,7 +83,7 @@ export class RelatedProductsCarouselComponent implements OnInit {
     return this.currentIndex > 0;
   }
 
-  getSlidesPerView(): number { // Changed from private to public
+  getSlidesPerView(): number {
     const width = window.innerWidth;
     if (width >= 1024) return 4;
     if (width >= 768) return 3;

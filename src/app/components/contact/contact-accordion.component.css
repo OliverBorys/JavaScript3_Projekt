@@ -1,6 +1,7 @@
 .accordion-panel {
   border-bottom: 1px solid #444;
   margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .accordion-header {
@@ -10,14 +11,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
   padding: 1rem 0;
   cursor: pointer;  position: relative;
   border-bottom: none;
 }
 
-/* extra visual indicator */
 .accordion-header--active::after {
   content: '';
   position: absolute;
