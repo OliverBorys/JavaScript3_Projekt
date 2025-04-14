@@ -1,8 +1,8 @@
 .product-details-wrapper {
-  margin-top: 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .product-layout {
@@ -16,7 +16,7 @@
   justify-content: center;
 }
 
-.text-center {
+.loading {
   text-align: center;
 }
 

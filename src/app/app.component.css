@@ -1,11 +1,9 @@
-header {
-  padding: 1rem;
+.header {
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
-  position: fixed;
-  background-color: white;
-  z-index: 100;
   width: 100%;
+  background-color: white;
 }
 
 .navigation-bar {
@@ -28,6 +26,6 @@ header {
   border-radius: 10px;
 }
 
-main {
-  margin-top: 4rem;
+body {
+  background-color: #f9f9fb;
 }
