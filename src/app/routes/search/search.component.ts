@@ -6,6 +6,8 @@ import { CategoryFilterComponent } from '../../components/product/category-filte
 import { SortDropdownComponent } from '../../components/product/sort-dropdown/sort-dropdown.component';
 import { ProductGridComponent } from '../../components/product/product-grid/product-grid.component';
 import { filterProducts, sortProducts } from '../../utils/filter-utils';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
   standalone: true,
@@ -26,7 +28,11 @@ export class SearchComponent {
   sort = 'newest';
   query = '';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
     this.http.get<any[]>('/api/products').subscribe((data) => (this.products = data));
@@ -34,6 +40,7 @@ export class SearchComponent {
 
     this.route.queryParams.subscribe((params) => {
       this.query = params['q'] || '';
+      this.updateTitle();
     });
   }
 
@@ -51,4 +58,11 @@ export class SearchComponent {
   }
 
   onLikeToggled() {}
+
+  private updateTitle(): void {
+    const title = this.query
+      ? `Search results for: ${this.query}`
+      : 'Search';
+    this.titleService.setTitle(title);
+  }
 }

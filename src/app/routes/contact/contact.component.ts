@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ContactAccordionComponent } from '../../components/contact/contact-accordion.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   standalone: true,
@@ -8,8 +9,13 @@ import { ContactAccordionComponent } from '../../components/contact/contact-acco
   styleUrls: ['./contact.component.css'],
   imports: [ContactAccordionComponent]
 })
+
 export class ContactComponent {
+  constructor(
+    private titleService: Title
+  ) {}
+
   ngOnInit(): void {
-    document.title = 'Contact';
+    this.titleService.setTitle('Contact');
   }
 }

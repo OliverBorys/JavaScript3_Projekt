@@ -6,6 +6,7 @@ import { ProductGridComponent } from '../../components/product/product-grid/prod
 import { filterProducts, sortProducts } from '../../utils/filter-utils';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   standalone: true,
@@ -30,13 +31,15 @@ export class ShopComponent {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.query = params['q'] || '';
       this.selectedCategory = params['category'] || '';
+      this.updateTitle();
     });
 
     this.http.get<any[]>('/api/products').subscribe(data => this.products = data);
@@ -60,9 +63,18 @@ export class ShopComponent {
       },
       queryParamsHandling: 'merge'
     });
+    this.selectedCategory = newCategory;
+    this.updateTitle();
   }
 
   onLikeToggled() {
     this.products = [...this.products];
+  }
+
+  updateTitle(): void {
+    const title = this.selectedCategory
+      ? `Shop: ${this.selectedCategory.charAt(0).toUpperCase() + this.selectedCategory.slice(1)}`
+      : 'Shop: All';
+    this.titleService.setTitle(title);
   }
 }

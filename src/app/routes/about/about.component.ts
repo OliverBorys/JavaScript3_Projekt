@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutSectionComponent } from './about-section.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   standalone: true,
@@ -10,6 +11,10 @@ import { AboutSectionComponent } from './about-section.component';
   imports: [CommonModule, AboutSectionComponent ]
 })
 export class AboutComponent implements OnInit {
+  constructor(
+    private titleService: Title
+  ) {}
+
   isMobile: boolean = false;
 
   mobileHeroImage = 'https://i.pinimg.com/736x/f3/0f/4e/f30f4ed97dc2b51e98547595b6e96957.jpg';
@@ -39,7 +44,7 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
     this.checkWidth();
     window.addEventListener('resize', this.checkWidth.bind(this));
-    document.title = 'About us';
+    this.titleService.setTitle('About us');
   }
 
   checkWidth(): void {

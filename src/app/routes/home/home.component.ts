@@ -5,7 +5,7 @@ import { ProductGridComponent } from '../../components/product/product-grid/prod
 import { HeroSectionComponent } from '../../components/hero-section/hero-section.component';
 import { CategoryGridComponent } from '../../components/category-grid/category-grid.component';
 import { AboutFindUsComponent } from '../../components/about-find-us/about-find-us.component';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   standalone: true,
@@ -25,11 +25,13 @@ export class HomeComponent implements OnInit {
   products: any[] = [];
   trendingProducts: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
-    document.title = 'Home';
-
+    this.titleService.setTitle('Home');
     this.http.get<any[]>('/api/products').subscribe(data => {
       this.products = data;
       this.trendingProducts = data
