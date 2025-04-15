@@ -1,21 +1,5 @@
 <body>
-  <header class="header">
-    <nav>
-      <a [routerLink]="['']" class="nav-link">Home</a>
-      <a [routerLink]="['/shop']" class="nav-link">Shop</a>
-      <a [routerLink]="['/contact']" class="nav-link">Contact</a>
-      <a [routerLink]="['/about']" class="nav-link">About</a>
-    </nav>
-    <form class="search-form" (ngSubmit)="onSearchSubmit()">
-      <input
-        type="text"
-        [(ngModel)]="searchQuery"
-        name="search"
-        placeholder="Search..."
-        class="search-input"
-      />
-    </form>
-  </header>
+  <app-header class="header"></app-header>
   <main class="main">
     <router-outlet></router-outlet>
   </main>
