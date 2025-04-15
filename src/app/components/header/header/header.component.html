@@ -8,7 +8,7 @@
     <app-sidebar-header></app-sidebar-header>
 
     <div class="logo-center">
-      <a routerLink="/">
+      <a [routerLink]="['/']">
         <img
           [src]="isHeaderWhite ? '/images/logo.svg' : '/images/logo-white.svg'"
           alt="Logo"

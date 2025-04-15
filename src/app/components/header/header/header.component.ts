@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HeaderService } from '../header.service';
 import { SidebarHeaderComponent } from '../sidebar-header/sidebar-header.component';
 import { LoginHeaderComponent } from '../login-header/login-header.component';
@@ -9,7 +9,7 @@ import { NgClass, NgIf } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [SidebarHeaderComponent, LoginHeaderComponent, CartHeaderComponent, NgIf, NgClass],
+  imports: [RouterModule, SidebarHeaderComponent, LoginHeaderComponent, CartHeaderComponent, NgIf, NgClass],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
