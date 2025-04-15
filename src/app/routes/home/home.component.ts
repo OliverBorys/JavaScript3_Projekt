@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ProductGridComponent } from '../../components/product/product-grid/product-grid.component';
-import { HeroSectionComponent } from '../../components/hero-section/hero-section.component';
-import { CategoryGridComponent } from '../../components/category-grid/category-grid.component';
-import { AboutFindUsComponent } from '../../components/about-find-us/about-find-us.component';
+import { HeroSectionComponent } from '../../components/home/hero-section/hero-section.component';
+import { CategoryGridComponent } from '../../components/home/category-grid/category-grid.component';
+import { AboutFindUsComponent } from '../../components/home/about-find-us/about-find-us.component';
 import { Title } from '@angular/platform-browser';
 
 @Component({
