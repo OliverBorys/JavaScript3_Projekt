@@ -9,9 +9,9 @@
 
   <div
     class="cart-drawer"
-    [class.cart-open]="state?.isCartOpen"
-    [class.cart-closed]="!state?.isCartOpen"
-    [attr.aria-hidden]="!state?.isCartOpen"
+    [class.cart-open]="state.isCartOpen"
+    [class.cart-closed]="!state.isCartOpen"
+    [attr.aria-hidden]="!state.isCartOpen"
   >
     <h2 class="cart-title">Your Cart</h2>
     <div class="cart-body">
@@ -51,7 +51,12 @@
     <div class="cart-footer">
       <div class="cart-total">Total: ${{ total }}</div>
       <div class="checkout-btn">
-        <a [routerLink]="['/checkout']" class="checkout-link">Checkout</a>
+        <a
+          [routerLink]="['/checkout']"
+          class="checkout-link"
+          (click)="closeCart()"
+          >Checkout</a
+        >
       </div>
     </div>
   </div>

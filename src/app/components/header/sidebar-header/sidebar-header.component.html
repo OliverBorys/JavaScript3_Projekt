@@ -2,7 +2,7 @@
   <button
     (mousedown)="toggleSidebar($event)"
     class="sidebar-button"
-    [class.open]="state?.isSidebarOpen"
+    [class.open]="state.isSidebarOpen"
   >
   <span [class.dark]="isHeaderWhite"></span>
   <span [class.dark]="isHeaderWhite"></span>
@@ -29,8 +29,8 @@
 
   <nav
     class="sidebar-nav"
-    [class.sidebar-open]="state?.isSidebarOpen"
-    [attr.aria-hidden]="!state?.isSidebarOpen"
+    [class.sidebar-open]="state.isSidebarOpen"
+    [attr.aria-hidden]="!state.isSidebarOpen"
   >
   <form #sidebarForm="ngForm" (ngSubmit)="handleSearchSubmit(sidebarForm)" class="search">
     <input
