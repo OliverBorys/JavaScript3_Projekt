@@ -3,11 +3,8 @@
     <nav class="footer-nav">
       <ng-container *ngFor="let item of navItems">
         <div class="nav-item">
-          <a
-            [routerLink]="['/', item.toLowerCase().replace(' ', '-')]"
-            class="footer-link"
-          >
-            {{ item }}
+          <a [routerLink]="[item.path]" class="footer-link">
+            {{ item.label }}
             <span class="footer-underline"></span>
           </a>
         </div>
@@ -23,9 +20,9 @@
           class="footer-social-link"
           [ngStyle]="{ '--hover-color': social.color }"
         >
-        <svg class="footer-icon">
-          <use [attr.href]="'#' + social.icon"></use>
-        </svg>
+          <svg class="footer-icon">
+            <use [attr.href]="'#' + social.icon"></use>
+          </svg>
         </a>
       </ng-container>
     </div>
@@ -35,7 +32,7 @@
     </p>
   </div>
 
-  <svg style="display: none;">
+  <svg style="display: none">
     <symbol id="facebook" viewBox="0 0 24 24">
       <path
         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128

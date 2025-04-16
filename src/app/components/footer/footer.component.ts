@@ -12,7 +12,12 @@ import { RouterModule } from '@angular/router';
 export class FooterComponent {
   currentYear = new Date().getFullYear();
 
-  navItems = ['Shop', 'About', 'Contact'];
+  navItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Shop', path: '/shop' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' }
+  ];
 
   socialLinks = [
     {
