@@ -37,6 +37,10 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
     private renderer: Renderer2
   ) {}
 
+  closeCart() {
+    this.headerService.toggleCart(false);
+  }
+
   ngOnInit() {
     this.stateSub = this.headerService.state$.subscribe((state) => {
       this.state = state;

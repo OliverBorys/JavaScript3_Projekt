@@ -1,0 +1,14 @@
+<div class="purchase-container">
+  <button (click)="handlePurchase()" class="purchase-button">
+    Pay Purchase
+  </button>
+
+  <div class="modal-overlay" *ngIf="showModal">
+    <div class="modal-box">
+      <h2>Thank you for your purchase!</h2>
+      <a [routerLink]="['/']" (click)="handleBackToHome()" class="modal-back-btn">
+        Back to Home
+      </a>
+    </div>
+  </div>
+</div>

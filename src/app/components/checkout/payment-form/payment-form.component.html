@@ -1,0 +1,27 @@
+<section class="payment-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2 class="section-title">Your Information</h2>
+    <div class="form-row">
+      <input type="text" placeholder="First name" formControlName="firstName" class="form-input" />
+      <input type="text" placeholder="Last name" formControlName="lastName" class="form-input" />
+    </div>
+    <input type="email" placeholder="Email address" formControlName="email" class="form-input" />
+    <input type="tel" placeholder="Phone number" formControlName="mobilePhone" class="form-input" />
+    <input type="text" placeholder="Address" formControlName="address" class="form-input" />
+    <input type="text" placeholder="City" formControlName="city" class="form-input" />
+    <input type="text" placeholder="Postal code" formControlName="postalCode" class="form-input" />
+
+    <h2 class="section-title">Payment</h2>
+    <div *ngFor="let method of paymentMethods" class="payment-option">
+      <label>
+        <input
+          type="radio"
+          formControlName="paymentMethod"
+          [value]="method"
+        />
+        Pay with {{ method }}
+        <img [src]="paymentIcons[method]" [alt]="method + ' icon'" class="payment-icon" />
+      </label>
+    </div>
+  </form>
+</section>
