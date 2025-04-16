@@ -39,7 +39,7 @@ export class FooterComponent {
       icon: 'twitter',
     },
     {
-      href: 'https://github.com/OliverBorys/JavaScript2_OliverBorys_VG',
+      href: 'https://github.com/OliverBorys/JavaScript3_Projekt',
       label: 'GitHub',
       color: 'black',
       icon: 'github',
