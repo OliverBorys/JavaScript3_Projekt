@@ -1,5 +1,4 @@
 .header {
-  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   width: 100%;
@@ -14,7 +13,7 @@
 .nav-link {
   text-decoration: none;
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-right: 1rem;
   background-color: grey;
   border-radius: 5px;
