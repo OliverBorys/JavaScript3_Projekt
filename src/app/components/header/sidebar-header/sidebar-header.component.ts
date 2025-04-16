@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { HeaderService, HeaderState } from '../header.service';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./sidebar-header.component.css'],
 })
 export class SidebarHeaderComponent implements OnInit, OnDestroy {
+  @Input() isHeaderWhite = false;
   state!: HeaderState;
   private stateSub!: Subscription;
   private removeClickListener: () => void = () => {};

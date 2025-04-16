@@ -10,13 +10,17 @@
 .sidebar-button span {
   height: 0.25rem;
   width: 100%;
-  background-color: black;
+  background-color: white;
   border-radius: 25px;
   position: absolute;
   top: 50%;
   right: -90%;
   transform: translate(-50%, -50%);
   transition: 0.3s ease;
+}
+
+.sidebar-button span.dark {
+  background-color: black;
 }
 
 .sidebar-button span:nth-child(1) {
@@ -54,12 +58,16 @@
 .nav-link {
   position: relative;
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 1.2rem;
   font-weight: 500;
   text-decoration: none;
   margin-left: 0.5rem;
   display: inline-block;
+}
+
+.nav-link.dark {
+  color: black;
 }
 
 .nav-link:hover .header-underline {

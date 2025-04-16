@@ -4,25 +4,25 @@
     class="sidebar-button"
     [class.open]="state?.isSidebarOpen"
   >
-    <span></span>
-    <span></span>
-    <span></span>
+  <span [class.dark]="isHeaderWhite"></span>
+  <span [class.dark]="isHeaderWhite"></span>
+  <span [class.dark]="isHeaderWhite"></span>
   </button>
 
   <nav class="nav-links">
-    <a [routerLink]="['/']" class="nav-link"
+    <a [routerLink]="['/']" class="nav-link" [class.dark]="isHeaderWhite"
       >Home <span class="header-underline"></span
     ></a>
-    <a [routerLink]="['/shop']" class="nav-link"
+    <a [routerLink]="['/shop']" class="nav-link" [class.dark]="isHeaderWhite"
       >Shop <span class="header-underline"></span
     ></a>
-    <a [routerLink]="['/about']" class="nav-link"
+    <a [routerLink]="['/about']" class="nav-link" [class.dark]="isHeaderWhite"
       >About <span class="header-underline"></span
     ></a>
-    <a [routerLink]="['/contact']" class="nav-link"
+    <a [routerLink]="['/contact']" class="nav-link" [class.dark]="isHeaderWhite"
       >Contact <span class="header-underline"></span
     ></a>
-    <a *ngIf="state?.isLoggedIn" [routerLink]="['/admin']" class="nav-link"
+    <a *ngIf="state?.isLoggedIn" [routerLink]="['/admin']" class="nav-link" [class.dark]="isHeaderWhite"
       >Admin <span class="header-underline"></span
     ></a>
   </nav>

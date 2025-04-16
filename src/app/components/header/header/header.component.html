@@ -5,7 +5,7 @@
   (mouseleave)="headerService.setHovered(false)"
 >
   <section class="header-content">
-    <app-sidebar-header></app-sidebar-header>
+    <app-sidebar-header [isHeaderWhite]="isHeaderWhite"></app-sidebar-header>
 
     <div class="logo-center">
       <a [routerLink]="['/']">
