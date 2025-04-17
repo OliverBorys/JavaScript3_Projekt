@@ -1,35 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { getCartItems, removeFromCart, updateCartQuantity, CartItem } from '../../../utils/local-storage-utils';
+import {
+  getCartItems,
+  removeFromCart,
+  updateCartQuantity,
+  CartItem,
+} from '../../../utils/local-storage-utils';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { HeaderService } from '../../header/header.service';
 
 @Component({
   selector: 'app-product-grid',
   templateUrl: './product-grid.component.html',
   styleUrls: ['./product-grid.component.css'],
   standalone: true,
-  imports: [NgIf, NgFor, CommonModule, RouterLink],
+  imports: [NgIf, NgFor, CommonModule],
 })
 export class ProductGridComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  ngOnInit(): void {
-    this.loadCartItems();
-    window.addEventListener('cartUpdated', this.loadCartItems.bind(this));
+  constructor(private headerService: HeaderService, private router: Router) {}
+
+  goToProduct(productId: number): void {
+    this.router.navigate(['/products', productId]);
   }
 
-  loadCartItems() {
+  ngOnInit(): void {
     this.cartItems = getCartItems();
+
+    this.headerService.cartChanged$.subscribe(() => {
+      this.cartItems = getCartItems();
+    });
   }
 
   changeQuantity(productId: number, quantity: number): void {
+    if (quantity < 1) return;
+
     updateCartQuantity(productId, quantity);
-    this.loadCartItems();
+
+    const item = this.cartItems.find((i) => i.id === productId);
+    if (item) item.quantity = quantity;
+
+    this.headerService.notifyCartChanged();
   }
 
   removeItem(productId: number): void {
     removeFromCart(productId);
-    this.loadCartItems();
+    this.cartItems = this.cartItems.filter((item) => item.id !== productId);
+    this.headerService.notifyCartChanged();
+  }
+
+  trackById(index: number, item: CartItem): number {
+    return item.id;
   }
 
   get total(): string {

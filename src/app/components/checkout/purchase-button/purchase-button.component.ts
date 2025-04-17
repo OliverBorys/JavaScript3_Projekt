@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { clearCart } from '../../../utils/local-storage-utils';
+import { HeaderService } from '../../header/header.service';
 
 @Component({
   selector: 'app-purchase-button',
@@ -13,11 +14,15 @@ import { clearCart } from '../../../utils/local-storage-utils';
 export class PurchaseButtonComponent {
   showModal = false;
 
+  constructor(private headerService: HeaderService) {}
+
   handlePurchase(): void {
     this.showModal = true;
   }
 
   handleBackToHome(): void {
     clearCart();
+    this.headerService.notifyCartChanged();
+    this.headerService.openCartTemporarily();
   }
 }

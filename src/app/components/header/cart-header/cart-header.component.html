@@ -18,7 +18,8 @@
       <div *ngIf="cartItems.length === 0">Your cart is empty</div>
 
       <div *ngFor="let item of cartItems; trackBy: trackById" class="cart-item">
-        <a [routerLink]="['/products', item.id]" class="item-info">
+        <a [routerLink]="['/product', item.id]" class="item-info" (click)="closeCart()"
+        >
           <img [src]="item.image" alt="{{ item.productName }}" />
           <div class="product-info">
             <h3 class="product-name">{{ item.productName }}</h3>

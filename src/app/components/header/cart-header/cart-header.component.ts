@@ -27,8 +27,9 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
   @Input() isHeaderWhite = false;
   cartItems = getCartItems();
   state!: HeaderState;
+
   private stateSub!: Subscription;
-  timeout: any;
+  private cartChangedSub!: Subscription;
   private removeClickListener: () => void = () => {};
 
   constructor(
@@ -37,18 +38,15 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
     private renderer: Renderer2
   ) {}
 
-  closeCart() {
-    this.headerService.toggleCart(false);
-  }
-
   ngOnInit() {
     this.stateSub = this.headerService.state$.subscribe((state) => {
       this.state = state;
     });
 
-    window.addEventListener('cartUpdated', this.handleCartUpdate);
+    this.cartChangedSub = this.headerService.cartChanged$.subscribe(() => {
+      this.cartItems = getCartItems();
+    });
 
-    // Close cart on outside click
     this.removeClickListener = this.renderer.listen(
       'document',
       'mousedown',
@@ -58,7 +56,7 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stateSub?.unsubscribe();
-    window.removeEventListener('cartUpdated', this.handleCartUpdate);
+    this.cartChangedSub?.unsubscribe();
     this.removeClickListener();
   }
 
@@ -70,26 +68,10 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
         cart &&
         !cart.contains(event.target as Node)
       ) {
-        this.headerService.toggleCart(false);
+        this.headerService.closeCart();
       }
     }, 0);
   };
-
-  handleCartUpdate = (event: any) => {
-    this.cartItems = getCartItems();
-    if (event.detail.openCart) {
-      this.headerService.toggleCart(true);
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(
-        () => this.headerService.toggleCart(false),
-        3000
-      );
-    }
-  };
-
-  trackById(index: number, item: any): number {
-    return item.id;
-  }
 
   onCartButtonClick(event: MouseEvent) {
     event.stopPropagation();
@@ -104,14 +86,20 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     removeFromCart(productId);
     this.cartItems = getCartItems();
-    this.headerService.toggleCart(true);
   }
 
   changeQuantity(event: Event, productId: number, quantity: number) {
     event.stopPropagation();
     updateCartQuantity(productId, quantity);
     this.cartItems = getCartItems();
-    this.headerService.toggleCart(true);
+  }
+
+  closeCart() {
+    this.headerService.closeCart();
+  }
+
+  trackById(index: number, item: any): number {
+    return item.id;
   }
 
   get total() {

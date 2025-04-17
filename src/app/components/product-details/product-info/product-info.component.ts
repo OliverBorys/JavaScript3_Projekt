@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductInfoAccordionComponent } from '../product-info-accordion/product-info-accordion.component';
+import { HeaderService } from '../../header/header.service';
 
 @Component({
   standalone: true,
@@ -15,6 +16,8 @@ export class ProductInfoComponent implements OnInit {
 
   selectedSize: string | null = null;
   sizeOptions: string[] = [];
+
+  constructor(private headerService: HeaderService) {}
 
   ngOnInit(): void {
     this.setupSizeOptions();
@@ -44,7 +47,9 @@ export class ProductInfoComponent implements OnInit {
     }
 
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { openCart: true } }));
+
+    this.headerService.openCartTemporarily();
+    this.headerService.notifyCartChanged();
     this.cartUpdated.emit(true);
   }
 }
