@@ -4,7 +4,7 @@
   Clear Order History
 </button>
 
-<div *ngIf="orders.length === 0">No orders found.</div>
+<div *ngIf="orders.length === 0" class="no-orders">No orders found.</div>
 
 <div *ngFor="let order of orders" class="order-card">
   <div class="order-columns">
