@@ -10,6 +10,7 @@ import { AdminComponent } from './routes/admin/admin.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { OrdersComponent } from './routes/admin/orders/orders.component';
 import { ProductsComponent } from './routes/admin/products/products.component';
+import { HeroImagesComponent } from './routes/admin/hero-images/hero-images.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'products', component: ProductsComponent },
-      // { path: 'hero-images', component: AdminHeroImagesComponent },
+      { path: 'hero-images', component: HeroImagesComponent },
       { path: 'orders', component: OrdersComponent }
     ]
   },
