@@ -7,14 +7,25 @@ import { ProductDetailsComponent } from './routes/product-details/product-detail
 import { SearchComponent } from './routes/search/search.component';
 import { CheckoutComponent } from './routes/checkout/checkout.component';
 import { AdminComponent } from './routes/admin/admin.component';
+import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
+import { OrdersComponent } from './routes/admin/orders/orders.component';
 
 export const routes: Routes = [
-  { path: '',component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'search', component: SearchComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'admin', component: AdminComponent }
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+      // { path: 'products', component: AdminProductsComponent },
+      // { path: 'hero-images', component: AdminHeroImagesComponent },
+      { path: 'orders', component: OrdersComponent }
+    ]
+  },
 ];
