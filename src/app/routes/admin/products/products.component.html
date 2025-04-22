@@ -51,9 +51,7 @@
         </td>
         <td class="actions">
           <button class="edit-btn" (click)="openEditModal(product)">Edit</button>
-          <button class="delete-btn" (click)="product.id !== undefined && deleteProduct(product.id)">
-            Delete
-          </button>
+          <button class="delete-btn" (click)="openDeleteModal(product)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -67,3 +65,10 @@
   (save)="handleSave($event)"
   (close)="closeModal()"
 ></app-product-form>
+
+<app-confirm-delete-modal
+  *ngIf="showDeleteModal"
+  [itemName]="productToDelete?.productName || ''"
+  (confirm)="confirmDelete()"
+  (close)="closeDeleteModal()"
+></app-confirm-delete-modal>

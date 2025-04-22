@@ -18,7 +18,7 @@ interface Product {
   secondaryImage2?: string;
   secondaryImage3?: string;
   productDescription: string;
-  isNew: string; // "yes" or "no" in the database
+  isNew: string;
   publishingDate: string;
 }
 
@@ -40,24 +40,22 @@ export class ProductFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // Map "yes"/"no" to true/false for the checkbox
     const isNewValue = this.product?.isNew === 'yes' ? true : false;
 
     this.form = this.fb.group({
       productName: [this.product?.productName || '', Validators.required],
       price: [this.product?.price || 0, [Validators.required, Validators.min(0)]],
       image: [this.product?.image || '', Validators.required],
-      secondaryImage1: [this.product?.secondaryImage1 || ''], // Optional
-      secondaryImage2: [this.product?.secondaryImage2 || ''], // Optional
-      secondaryImage3: [this.product?.secondaryImage3 || ''], // Optional
+      secondaryImage1: [this.product?.secondaryImage1 || ''],
+      secondaryImage2: [this.product?.secondaryImage2 || ''],
+      secondaryImage3: [this.product?.secondaryImage3 || ''],
       brand: [this.product?.brand || '', Validators.required],
       productDescription: [this.product?.productDescription || '', Validators.required],
-      isNew: [isNewValue, Validators.required], // Checkbox, maps to "yes"/"no"
+      isNew: [isNewValue, Validators.required],
       categoryId: [this.product?.categoryId || '', Validators.required],
       publishingDate: [this.product?.publishingDate || '', Validators.required],
     });
 
-    // Debug form state
     this.form.valueChanges.subscribe((value) => {
       console.log('Form Value:', value);
       console.log('Form Valid:', this.form.valid);
@@ -69,9 +67,9 @@ export class ProductFormComponent implements OnInit {
       const productData: Product = {
         ...this.form.value,
         id: this.product?.id,
-        price: Number(this.form.value.price), // Ensure price is a number
-        categoryId: Number(this.form.value.categoryId), // Ensure categoryId is a number
-        isNew: this.form.value.isNew ? 'yes' : 'no', // Map true/false to "yes"/"no"
+        price: Number(this.form.value.price),
+        categoryId: Number(this.form.value.categoryId),
+        isNew: this.form.value.isNew ? 'yes' : 'no',
       };
       console.log('Submitting Product:', productData);
       this.save.emit(productData);

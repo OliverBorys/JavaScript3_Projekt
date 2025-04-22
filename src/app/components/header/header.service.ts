@@ -24,7 +24,6 @@ export class HeaderService {
   private stateSubject = new BehaviorSubject<HeaderState>(this.initialState);
   state$ = this.stateSubject.asObservable();
 
-  // Subject för att notifiera komponenter om att varukorgen har ändrats
   private cartChangedSubject = new Subject<void>();
   cartChanged$ = this.cartChangedSubject.asObservable();
 
@@ -36,8 +35,6 @@ export class HeaderService {
     this.stateSubject.next({ ...this.state, ...newState });
   }
 
-  // Auth-related
-
   setLoggedIn(user: any) {
     localStorage.setItem('adminUser', JSON.stringify(user));
     this.setState({ user, isLoggedIn: true });
@@ -47,8 +44,6 @@ export class HeaderService {
     localStorage.removeItem('adminUser');
     this.setState({ user: null, isLoggedIn: false });
   }
-
-  // UI state toggles
 
   setScrolled(scrolled: boolean) {
     this.setState({ isScrolled: scrolled });
@@ -61,8 +56,6 @@ export class HeaderService {
   toggleSidebar(force?: boolean) {
     this.setState({ isSidebarOpen: force ?? !this.state.isSidebarOpen });
   }
-
-  // CART logic
 
   toggleCart(force?: boolean): void {
     this.setState({ isCartOpen: force ?? !this.state.isCartOpen });

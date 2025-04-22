@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
 
 interface Category {
   id: number;
@@ -21,15 +22,15 @@ interface Product {
   secondaryImage2?: string;
   secondaryImage3?: string;
   productDescription: string;
-  isNew: string; // "yes" or "no" in the database
+  isNew: string;
   publishingDate: string;
-  categoryName?: string; // Added for UI display
+  categoryName?: string;
 }
 
 @Component({
   selector: 'app-admin-products',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ProductFormComponent],
+  imports: [CommonModule, RouterModule, FormsModule, ProductFormComponent, ConfirmDeleteModalComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
@@ -40,9 +41,11 @@ export class ProductsComponent implements OnInit {
   error = false;
   searchQuery: string = '';
 
-  // Modal state
   showModal = false;
   selectedProduct: Product | null = null;
+
+  showDeleteModal = false;
+  productToDelete: Product | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -63,7 +66,7 @@ export class ProductsComponent implements OnInit {
           ...p,
           categoryName:
             categories.find((c) => c.id === p.categoryId)?.categoryName || 'Unknown',
-          isNew: p.isNew, // Keep as "yes"/"no"
+          isNew: p.isNew,
         }));
         this.loading = false;
       })
@@ -73,7 +76,6 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  // Sorting
   sortColumn: keyof Product = 'id';
   sortDirection: 'asc' | 'desc' = 'asc';
 
@@ -98,16 +100,13 @@ export class ProductsComponent implements OnInit {
       let aValue = a[this.sortColumn];
       let bValue = b[this.sortColumn];
 
-      // Handle undefined values
       if (aValue === undefined || aValue === null) return bValue === undefined || bValue === null ? 0 : -1 * dir;
       if (bValue === undefined || bValue === null) return 1 * dir;
 
-      // Special handling for isNew
       if (this.sortColumn === 'isNew') {
         aValue = aValue === 'yes' ? 1 : 0;
         bValue = bValue === 'yes' ? 1 : 0;
       }
-      // Handle string columns (productName, categoryName, etc.)
       else if (typeof aValue === 'string' && typeof bValue === 'string') {
         aValue = aValue.toLowerCase();
         bValue = bValue.toLowerCase();
@@ -119,7 +118,6 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  // Modal handlers
   openAddModal() {
     this.selectedProduct = null;
     this.showModal = true;
@@ -153,15 +151,28 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  deleteProduct(id: number) {
-    if (!confirm('Are you sure you want to delete this product?')) return;
+  openDeleteModal(product: Product) {
+    this.productToDelete = product;
+    this.showDeleteModal = true;
+  }
 
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.productToDelete = null;
+  }
+
+  confirmDelete() {
+    if (!this.productToDelete || this.productToDelete.id === undefined) return;
+
+    const id = this.productToDelete.id;
     this.http.delete(`/api/products/${id}`).subscribe({
       next: () => {
         this.products = this.products.filter((p) => p.id !== id);
+        this.closeDeleteModal();
       },
       error: (err) => {
         console.error('Failed to delete product:', err);
+        this.closeDeleteModal();
         alert('Failed to delete product. Please try again.');
       },
     });
