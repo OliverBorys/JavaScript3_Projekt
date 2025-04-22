@@ -23,7 +23,7 @@
 .modal-content {
   overflow-y: auto;
   flex: 1;
-  padding: 1rem 2rem;
+  padding: 0 2rem 1rem;
 }
 
 .modal-title {
@@ -40,7 +40,7 @@
 }
 
 .form-section {
-  margin: 1rem 0;
+  margin: 1rem 0.2rem;
 }
 
 .form-grid {
@@ -76,7 +76,8 @@ textarea {
   border-radius: 6px;
   background-color: #fff;
   transition: all 0.2s ease;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
 }
 
 input:focus,
@@ -160,7 +161,8 @@ textarea {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
 }
 
 .modal-actions button:first-child {
