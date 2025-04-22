@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { getOrderHistory } from '../../../utils/local-storage-utils';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,11 +11,15 @@ import { getOrderHistory } from '../../../utils/local-storage-utils';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  constructor(
+    private titleService: Title
+  ) {}
   totalRevenue = 0;
   totalSoldProducts = 0;
   topProducts: { name: string, quantity: number }[] = [];
 
   ngOnInit(): void {
+    this.titleService.setTitle('Admin');
     const orders = getOrderHistory();
     const productMap: Record<string, number> = {};
 

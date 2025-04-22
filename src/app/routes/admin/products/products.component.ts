@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
 
@@ -47,9 +48,10 @@ export class ProductsComponent implements OnInit {
   showDeleteModal = false;
   productToDelete: Product | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Product Management');
     this.loadData();
   }
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 interface HeroImage {
   id: number;
@@ -26,13 +27,18 @@ export class HeroImagesComponent implements OnInit {
   form: FormGroup;
   errorMessage: string | null = null;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private titleService: Title
+  ) {
     this.form = this.fb.group({
       image_url: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
     });
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Hero images');
     this.loadHeroImages();
   }
 
