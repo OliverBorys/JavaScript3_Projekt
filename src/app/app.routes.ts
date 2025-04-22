@@ -9,6 +9,7 @@ import { CheckoutComponent } from './routes/checkout/checkout.component';
 import { AdminComponent } from './routes/admin/admin.component';
 import { DashboardComponent } from './routes/admin/dashboard/dashboard.component';
 import { OrdersComponent } from './routes/admin/orders/orders.component';
+import { ProductsComponent } from './routes/admin/products/products.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,7 +24,7 @@ export const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: '', component: DashboardComponent },
-      // { path: 'products', component: AdminProductsComponent },
+      { path: 'products', component: ProductsComponent },
       // { path: 'hero-images', component: AdminHeroImagesComponent },
       { path: 'orders', component: OrdersComponent }
     ]
