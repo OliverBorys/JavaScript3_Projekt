@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { clearCart } from '../../../utils/local-storage-utils';
+import { clearCart, getCartItems, saveOrder, Order } from '../../../utils/local-storage-utils';
 import { HeaderService } from '../../header/header.service';
 
 @Component({
@@ -17,6 +17,18 @@ export class PurchaseButtonComponent {
   constructor(private headerService: HeaderService) {}
 
   handlePurchase(): void {
+    const items = getCartItems();
+    const formData = JSON.parse(localStorage.getItem('checkoutForm') || '{}');
+
+    const newOrder: Order = {
+      id: Date.now(),
+      date: new Date().toISOString(),
+      items,
+      customer: formData,
+    };
+
+    saveOrder(newOrder);
+
     this.showModal = true;
   }
 
@@ -24,5 +36,7 @@ export class PurchaseButtonComponent {
     clearCart();
     this.headerService.notifyCartChanged();
     this.headerService.openCartTemporarily();
+    this.showModal = false;
   }
+
 }

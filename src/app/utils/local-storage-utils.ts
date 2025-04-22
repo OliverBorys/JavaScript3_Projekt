@@ -74,3 +74,36 @@ export function clearCart(): void {
   localStorage.removeItem(CART_ITEMS_KEY);
   saveCartItems([], true);
 }
+
+
+const ORDER_HISTORY_KEY = 'orderHistory';
+
+export interface Order {
+  id: number;
+  date: string;
+  items: CartItem[];
+  customer: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    mobilePhone: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    paymentMethod: string;
+  };
+}
+
+export function getOrderHistory(): Order[] {
+  return JSON.parse(localStorage.getItem(ORDER_HISTORY_KEY) || '[]');
+}
+
+export function saveOrder(order: Order): void {
+  const orders = getOrderHistory();
+  orders.push(order);
+  localStorage.setItem(ORDER_HISTORY_KEY, JSON.stringify(orders));
+}
+
+export function clearOrderHistory(): void {
+  localStorage.removeItem(ORDER_HISTORY_KEY);
+}

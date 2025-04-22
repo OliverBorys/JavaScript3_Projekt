@@ -1,18 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import {
+  clearCart,
+  getCartItems,
+  saveOrder,
+  Order
+} from '../../../utils/local-storage-utils';
+import { HeaderService } from '../../header/header.service';
 
 @Component({
   selector: 'app-payment-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './payment-form.component.html',
   styleUrls: ['./payment-form.component.css']
 })
 export class PaymentFormComponent implements OnInit {
   form!: FormGroup;
-  paymentMethods = ['Card', 'Swish', 'Klarna', 'PayPal'];
+  showModal = false;
 
+  paymentMethods = ['Card', 'Swish', 'Klarna', 'PayPal'];
   paymentIcons: Record<string, string> = {
     Card: '/images/card-icon.png',
     Swish: '/images/swish-icon.png',
@@ -20,24 +29,45 @@ export class PaymentFormComponent implements OnInit {
     PayPal: '/images/paypal-icon.png'
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private headerService: HeaderService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      postalCode: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mobilePhone: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
-      mobilePhone: ['', Validators.required],
+      postalCode: ['', Validators.required],
       paymentMethod: ['', Validators.required]
     });
   }
 
-  onSubmit() {
-    if (this.form.valid) {
-      console.log('Form submitted:', this.form.value);
+  handlePurchase(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
+
+    const items = getCartItems();
+    const formData = this.form.value;
+
+    const newOrder: Order = {
+      id: Date.now(),
+      date: new Date().toISOString(),
+      items,
+      customer: formData,
+    };
+
+    saveOrder(newOrder);
+    this.showModal = true;
+  }
+
+  handleBackToHome(): void {
+    clearCart();
+    this.headerService.notifyCartChanged();
+    this.headerService.openCartTemporarily();
+    this.showModal = false;
   }
 }
