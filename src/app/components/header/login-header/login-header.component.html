@@ -15,7 +15,8 @@
         <h2 class="login-title">Please enter your login details below</h2>
         <form #loginForm="ngForm" (ngSubmit)="handleLogin(loginForm)">
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username" ngModel required />
+          <input type="text" id="username" name="username" ngModel required autocomplete="username"
+          />
           <label for="password">Password:</label>
           <input
             type="password"
@@ -23,6 +24,7 @@
             name="password"
             ngModel
             required
+            autocomplete="current-password"
           />
           <button type="submit" class="sign-in-btn">Sign In</button>
         </form>
