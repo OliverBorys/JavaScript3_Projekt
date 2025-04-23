@@ -55,11 +55,6 @@ export class ProductFormComponent implements OnInit {
       categoryId: [this.product?.categoryId || '', Validators.required],
       publishingDate: [this.product?.publishingDate || '', Validators.required],
     });
-
-    this.form.valueChanges.subscribe((value) => {
-      console.log('Form Value:', value);
-      console.log('Form Valid:', this.form.valid);
-    });
   }
 
   submit() {
