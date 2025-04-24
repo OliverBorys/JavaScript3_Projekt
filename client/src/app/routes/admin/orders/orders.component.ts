@@ -19,7 +19,9 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Order history');
-    this.orders = getOrderHistory();
+    this.orders = getOrderHistory().sort((a, b) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
   }
 
   getOrderTotal(order: Order): string {
