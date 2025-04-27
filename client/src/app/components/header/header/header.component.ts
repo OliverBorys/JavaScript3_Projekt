@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { HeaderService } from '../header.service';
+import { HeaderService, HeaderState } from '../header.service';
 import { SidebarHeaderComponent } from '../sidebar-header/sidebar-header.component';
 import { LoginHeaderComponent } from '../login-header/login-header.component';
 import { CartHeaderComponent } from '../cart-header/cart-header.component';
@@ -15,7 +15,7 @@ import { NgClass, NgIf } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   isHeaderWhite = true;
-  state: any;
+  state!: HeaderState;
 
   constructor(public headerService: HeaderService, private router: Router) {}
 

@@ -7,6 +7,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import {
+  CartItem,
   getCartItems,
   removeFromCart,
   updateCartQuantity,
@@ -98,7 +99,7 @@ export class CartHeaderComponent implements OnInit, OnDestroy {
     this.headerService.closeCart();
   }
 
-  trackById(index: number, item: any): number {
+  trackById(index: number, item: CartItem): number {
     return item.id;
   }
 
