@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-
-export interface HeaderState {
-  isLoggedIn: boolean;
-  user: any;
-  isScrolled: boolean;
-  isHovered: boolean;
-  isSidebarOpen: boolean;
-  isCartOpen: boolean;
-}
+import { HeaderState } from '../../models/header-state.model';
 
 @Injectable({ providedIn: 'root' })
 export class HeaderService {

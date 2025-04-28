@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { getOrderHistory, clearOrderHistory, Order } from '../../../utils/local-storage-utils';
+import { getOrderHistory, clearOrderHistory } from '../../../utils/local-storage-utils';
+import { Order } from '../../../models/order.model';
 import { Title } from '@angular/platform-browser';
 
 @Component({

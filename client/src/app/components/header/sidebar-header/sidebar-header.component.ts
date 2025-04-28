@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef, Renderer2, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { HeaderService, HeaderState } from '../header.service';
+import { HeaderService } from '../header.service';
+import { HeaderState } from '../../../models/header-state.model';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';

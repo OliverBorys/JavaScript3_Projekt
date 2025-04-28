@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HeroImage } from '../../../models/hero-image.model';
 import { Title } from '@angular/platform-browser';
-
-interface HeroImage {
-  id: number;
-  image_url: string;
-}
 
 @Component({
   selector: 'app-hero-images',
@@ -33,7 +29,10 @@ export class HeroImagesComponent implements OnInit {
     private titleService: Title
   ) {
     this.form = this.fb.group({
-      image_url: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+      image_url: [
+        '',
+        [Validators.required, Validators.pattern(/^https?:\/\/.+/)],
+      ],
     });
   }
 
@@ -44,15 +43,16 @@ export class HeroImagesComponent implements OnInit {
 
   loadHeroImages() {
     this.loading = true;
-    this.http.get<HeroImage[]>('/api/hero-images').toPromise()
-      .then((images = []) => {
-        this.heroImages = images.filter(img => img.id === 1 || img.id === 2);
+    this.http.get<HeroImage[]>('/api/hero-images').subscribe({
+      next: (images = []) => {
+        this.heroImages = images.filter((img) => img.id === 1 || img.id === 2);
         this.loading = false;
-      })
-      .catch(() => {
+      },
+      error: () => {
         this.error = true;
         this.loading = false;
-      });
+      },
+    });
   }
 
   openEditModal(heroImage: HeroImage) {

@@ -7,12 +7,13 @@ import {
   Renderer2,
 } from '@angular/core';
 import {
-  CartItem,
   getCartItems,
   removeFromCart,
   updateCartQuantity,
 } from '../../../utils/local-storage-utils';
-import { HeaderService, HeaderState } from '../header.service';
+import { CartItem } from '../../../models/cart-item.model';
+import { HeaderState } from '../../../models/header-state.model';
+import { HeaderService } from '../header.service';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';

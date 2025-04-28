@@ -6,27 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
+import { Category } from '../../../models/category.model';
+import { FullProduct } from '../../../models/full-product.model';
 
-interface Category {
-  id: number;
-  categoryName: string;
-}
 
-interface Product {
-  id?: number;
-  productName: string;
-  brand: string;
-  categoryId: number;
-  price: number;
-  image: string;
-  secondaryImage1?: string;
-  secondaryImage2?: string;
-  secondaryImage3?: string;
-  productDescription: string;
-  isNew: string;
-  publishingDate: string;
-  categoryName?: string;
-}
 
 @Component({
   selector: 'app-admin-products',
@@ -36,17 +19,17 @@ interface Product {
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products: Product[] = [];
+  products: FullProduct[] = [];
   categories: Category[] = [];
   loading = true;
   error = false;
   searchQuery: string = '';
 
   showModal = false;
-  selectedProduct: Product | null = null;
+  selectedProduct: FullProduct | null = null;
 
   showDeleteModal = false;
-  productToDelete: Product | null = null;
+  productToDelete: FullProduct | null = null;
 
   constructor(private http: HttpClient, private titleService: Title) {}
 
@@ -59,7 +42,7 @@ export class ProductsComponent implements OnInit {
     this.loading = true;
 
     Promise.all([
-      this.http.get<Product[]>('/api/products').toPromise(),
+      this.http.get<FullProduct[]>('/api/products').toPromise(),
       this.http.get<Category[]>('/api/categories').toPromise(),
     ])
       .then(([products = [], categories = []]) => {
@@ -78,10 +61,10 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  sortColumn: keyof Product = 'id';
+  sortColumn: keyof FullProduct = 'id';
   sortDirection: 'asc' | 'desc' = 'asc';
 
-  setSort(column: keyof Product) {
+  setSort(column: keyof FullProduct) {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -125,7 +108,7 @@ export class ProductsComponent implements OnInit {
     this.showModal = true;
   }
 
-  openEditModal(product: Product) {
+  openEditModal(product: FullProduct) {
     this.selectedProduct = product;
     this.showModal = true;
   }
@@ -135,7 +118,7 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
-  handleSave(product: Product) {
+  handleSave(product: FullProduct) {
     const url = product.id ? `/api/products/${product.id}` : '/api/products';
     const request = product.id
       ? this.http.put(url, product)
@@ -153,7 +136,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  openDeleteModal(product: Product) {
+  openDeleteModal(product: FullProduct) {
     this.productToDelete = product;
     this.showDeleteModal = true;
   }

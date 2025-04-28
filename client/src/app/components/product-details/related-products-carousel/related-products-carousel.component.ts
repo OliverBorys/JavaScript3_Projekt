@@ -4,15 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductCardComponent } from '../../product/product-card/product-card.component';
-
-interface Product {
-  id: number;
-  categoryId: number;
-  image: string;
-  productName: string;
-  brand: string;
-  price: number;
-}
+import { RelatedProduct } from '../../../models/related-products.model';
 
 @Component({
   selector: 'app-related-products-carousel',
@@ -24,7 +16,7 @@ interface Product {
 export class RelatedProductsCarouselComponent implements OnInit {
   @Input() currentId!: number;
   @Input() categoryId!: number;
-  filteredProducts: Product[] = [];
+  filteredProducts: RelatedProduct[] = [];
   loading = true;
   error = '';
   currentIndex = 0;
@@ -56,7 +48,7 @@ export class RelatedProductsCarouselComponent implements OnInit {
 
 
   fetchProducts(id: number): void {
-    this.http.get<Product[]>('/api/products').subscribe({
+    this.http.get<RelatedProduct[]>('/api/products').subscribe({
       next: (data) => {
         const currentProduct = data.find((product) => product.id === id);
         if (!currentProduct) {

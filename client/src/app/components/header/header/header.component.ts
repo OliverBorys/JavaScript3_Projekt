@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { HeaderService, HeaderState } from '../header.service';
+import { HeaderService } from '../header.service';
+import { HeaderState } from '../../../models/header-state.model';
 import { SidebarHeaderComponent } from '../sidebar-header/sidebar-header.component';
 import { LoginHeaderComponent } from '../login-header/login-header.component';
 import { CartHeaderComponent } from '../cart-header/cart-header.component';

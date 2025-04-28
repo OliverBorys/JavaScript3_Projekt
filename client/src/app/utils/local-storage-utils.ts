@@ -1,3 +1,6 @@
+import { CartItem } from '../models/cart-item.model';
+import { Order } from '../models/order.model';
+
 const LIKED_PRODUCTS_KEY = 'likedProducts';
 
 export function getLikedProducts(): number[] {
@@ -26,15 +29,6 @@ export function isProductLiked(productId: number): boolean {
 
 const CART_ITEMS_KEY = 'cartItems';
 const CART_UPDATED_EVENT = 'cartUpdated';
-
-export interface CartItem {
-  id: number;
-  productName: string;
-  price: number;
-  quantity: number;
-  brand?: string;
-  image?: string;
-}
 
 export function getCartItems(): CartItem[] {
   return JSON.parse(localStorage.getItem(CART_ITEMS_KEY) || '[]');
@@ -77,22 +71,6 @@ export function clearCart(): void {
 
 
 const ORDER_HISTORY_KEY = 'orderHistory';
-
-export interface Order {
-  id: number;
-  date: string;
-  items: CartItem[];
-  customer: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    mobilePhone: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    paymentMethod: string;
-  };
-}
 
 export function getOrderHistory(): Order[] {
   return JSON.parse(localStorage.getItem(ORDER_HISTORY_KEY) || '[]');

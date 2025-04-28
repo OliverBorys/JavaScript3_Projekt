@@ -6,8 +6,8 @@ import {
   clearCart,
   getCartItems,
   saveOrder,
-  Order
 } from '../../../utils/local-storage-utils';
+import { Order } from '../../../models/order.model';
 import { HeaderService } from '../../header/header.service';
 
 @Component({

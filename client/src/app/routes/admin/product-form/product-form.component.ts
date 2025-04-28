@@ -1,26 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Category } from '../../../models/category.model';
+import { FullProduct } from '../../../models/full-product.model';
 
-interface Category {
-  id: number;
-  categoryName: string;
-}
-
-interface Product {
-  id?: number;
-  productName: string;
-  brand: string;
-  categoryId: number;
-  price: number;
-  image: string;
-  secondaryImage1?: string;
-  secondaryImage2?: string;
-  secondaryImage3?: string;
-  productDescription: string;
-  isNew: string;
-  publishingDate: string;
-}
 
 @Component({
   selector: 'app-product-form',
@@ -30,9 +13,9 @@ interface Product {
   styleUrls: ['./product-form.component.css'],
 })
 export class ProductFormComponent implements OnInit {
-  @Input() product: Product | null = null;
+  @Input() product: FullProduct | null = null;
   @Input() categories: Category[] = [];
-  @Output() save = new EventEmitter<Product>();
+  @Output() save = new EventEmitter<FullProduct>();
   @Output() close = new EventEmitter<void>();
 
   form!: FormGroup;
@@ -59,7 +42,7 @@ export class ProductFormComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      const productData: Product = {
+      const productData: FullProduct = {
         ...this.form.value,
         id: this.product?.id,
         price: Number(this.form.value.price),

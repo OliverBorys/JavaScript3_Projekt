@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {
   getCartItems,
   removeFromCart,
-  updateCartQuantity,
-  CartItem,
+  updateCartQuantity
 } from '../../../utils/local-storage-utils';
+import { CartItem } from '../../../models/cart-item.model';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { HeaderService } from '../../header/header.service';
