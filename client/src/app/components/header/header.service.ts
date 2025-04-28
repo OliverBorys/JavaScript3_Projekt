@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { HeaderState } from '../../models/header-state.model';
+import { User } from '../../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class HeaderService {
   private initialState: HeaderState = {
     isLoggedIn: localStorage.getItem('adminUser') !== null,
-    user: JSON.parse(localStorage.getItem('adminUser') || 'null'),
+    user: JSON.parse(localStorage.getItem('adminUser') || 'null') as User | null,
     isScrolled: false,
     isHovered: false,
     isSidebarOpen: false,
@@ -27,7 +28,7 @@ export class HeaderService {
     this.stateSubject.next({ ...this.state, ...newState });
   }
 
-  setLoggedIn(user: any) {
+  setLoggedIn(user: User) {
     localStorage.setItem('adminUser', JSON.stringify(user));
     this.setState({ user, isLoggedIn: true });
   }

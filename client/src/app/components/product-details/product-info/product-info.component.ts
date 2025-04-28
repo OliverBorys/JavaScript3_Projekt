@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductInfoAccordionComponent } from '../product-info-accordion/product-info-accordion.component';
 import { HeaderService } from '../../header/header.service';
+import { GridProduct } from '../../../models/grid-product.model';
 
 @Component({
   standalone: true,
@@ -11,7 +12,7 @@ import { HeaderService } from '../../header/header.service';
   imports: [CommonModule, ProductInfoAccordionComponent]
 })
 export class ProductInfoComponent implements OnInit {
-  @Input() product: any;
+  @Input() product!: GridProduct;
   @Output() cartUpdated = new EventEmitter<boolean>();
 
   selectedSize: string | null = null;

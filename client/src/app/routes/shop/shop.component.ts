@@ -7,6 +7,8 @@ import { filterProducts, sortProducts } from '../../utils/filter-utils';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { GridProduct } from '../../models/grid-product.model';
+import { Category } from '../../models/category.model';
 
 @Component({
   standalone: true,
@@ -22,8 +24,8 @@ import { Title } from '@angular/platform-browser';
   ]
 })
 export class ShopComponent {
-  products: any[] = [];
-  categories: { id: number; categoryName: string }[] = [];
+  products: GridProduct[] = [];
+  categories: Category[] = [];
   selectedCategory: string = '';
   sort: string = 'newest';
   query: string = '';
@@ -42,11 +44,11 @@ export class ShopComponent {
       this.updateTitle();
     });
 
-    this.http.get<any[]>('/api/products').subscribe(data => this.products = data);
-    this.http.get<any[]>('/api/categories').subscribe(data => this.categories = data);
+    this.http.get<GridProduct[]>('/api/products').subscribe(data => this.products = data);
+    this.http.get<Category[]>('/api/categories').subscribe(data => this.categories = data);
   }
 
-  get filteredAndSortedProducts(): any[] {
+  get filteredAndSortedProducts(): GridProduct[] {
     const filtered = filterProducts(this.products, this.query, this.selectedCategory);
     return sortProducts(filtered, this.sort);
   }

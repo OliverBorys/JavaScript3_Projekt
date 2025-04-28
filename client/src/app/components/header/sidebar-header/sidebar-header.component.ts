@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ElementRef, Renderer2, Input } from '@ang
 import { Router, RouterModule } from '@angular/router';
 import { HeaderService } from '../header.service';
 import { HeaderState } from '../../../models/header-state.model';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -57,7 +57,7 @@ export class SidebarHeaderComponent implements OnInit, OnDestroy {
     }, 0);
   };
 
-  handleSearchSubmit(form: any) {
+  handleSearchSubmit(form: NgForm) {
     const searchQuery = form.value.q?.trim();
     if (searchQuery) {
       this.router.navigate(['/search'], { queryParams: { q: searchQuery } });
@@ -67,6 +67,10 @@ export class SidebarHeaderComponent implements OnInit, OnDestroy {
   }
 
   closeSidebar() {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     this.headerService.toggleSidebar(false);
   }
 }

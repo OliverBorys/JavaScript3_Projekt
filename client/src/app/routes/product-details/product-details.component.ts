@@ -6,7 +6,7 @@ import { ProductImageComponent } from '../../components/product-details/product-
 import { ProductInfoComponent } from '../../components/product-details/product-info/product-info.component';
 import { MissingProductComponent } from '../../components/product-details/missing-product/missing-product.component';
 import { RelatedProductsCarouselComponent } from '../../components/product-details/related-products-carousel/related-products-carousel.component';
-
+import { GridProduct } from '../../models/grid-product.model';
 
 @Component({
   standalone: true,
@@ -23,7 +23,7 @@ import { RelatedProductsCarouselComponent } from '../../components/product-detai
   ]
 })
 export class ProductDetailsComponent implements OnInit {
-  product: any;
+  product!: GridProduct;
   loading = true;
   error = false;
   id!: string;
@@ -42,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
 
   fetchProduct(id: string): void {
     this.loading = true;
-    this.http.get(`/api/products/${id}`).subscribe({
+    this.http.get<GridProduct>(`/api/products/${id}`).subscribe({
       next: (res) => {
         this.product = res;
         this.loading = false;

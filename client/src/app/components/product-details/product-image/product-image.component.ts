@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FullProduct } from '../../../models/full-product.model';
 
 @Component({
   selector: 'app-product-image',
@@ -9,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./product-image.component.css'],
 })
 export class ProductImageComponent {
-  @Input() product: any;
+  @Input() product!: FullProduct;
   currentIndex = 0;
 
   get images(): string[] {
@@ -19,7 +20,7 @@ export class ProductImageComponent {
       this.product.secondaryImage1,
       this.product.secondaryImage2,
       this.product.secondaryImage3,
-    ].filter(Boolean);
+    ].filter((img): img is string => Boolean(img));
   }
 
   nextImage(): void {

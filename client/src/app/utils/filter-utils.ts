@@ -1,10 +1,11 @@
+import { GridProduct } from '../models/grid-product.model';
 import { getLikedProducts } from './local-storage-utils';
 
 export function filterProducts(
-  products: any[] = [],
+  products: GridProduct[] = [],
   query: string,
   selectedCategory: string
-): any[] {
+): GridProduct[] {
   if (!Array.isArray(products)) {
     console.error('Error: products is not an array', products);
     return [];
@@ -27,7 +28,7 @@ export function filterProducts(
   });
 }
 
-export function sortProducts(products: any[] = [], sort: string): any[] {
+export function sortProducts(products: GridProduct[] = [], sort: string): GridProduct[] {
   if (!Array.isArray(products)) {
     console.error('Error: products is not an array', products);
     return [];

@@ -7,6 +7,8 @@ import { SortDropdownComponent } from '../../components/product/sort-dropdown/so
 import { ProductGridComponent } from '../../components/product/product-grid/product-grid.component';
 import { filterProducts, sortProducts } from '../../utils/filter-utils';
 import { Title } from '@angular/platform-browser';
+import { GridProduct } from '../../models/grid-product.model';
+import { Category } from '../../models/category.model';
 
 
 @Component({
@@ -22,8 +24,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
-  products: any[] = [];
-  categories: { id: number; categoryName: string }[] = [];
+  products: GridProduct[] = [];
+  categories: Category[] = [];
   selectedCategory = '';
   sort = 'newest';
   query = '';
@@ -35,8 +37,8 @@ export class SearchComponent {
   ) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('/api/products').subscribe((data) => (this.products = data));
-    this.http.get<any[]>('/api/categories').subscribe((data) => (this.categories = data));
+    this.http.get<GridProduct[]>('/api/products').subscribe((data) => (this.products = data));
+    this.http.get<Category[]>('/api/categories').subscribe((data) => (this.categories = data));
 
     this.route.queryParams.subscribe((params) => {
       this.query = params['q'] || '';
@@ -44,7 +46,7 @@ export class SearchComponent {
     });
   }
 
-  get filteredAndSortedProducts(): any[] {
+  get filteredAndSortedProducts(): GridProduct[] {
     const filtered = filterProducts(this.products, this.query, this.selectedCategory);
     return sortProducts(filtered, this.sort);
   }

@@ -4,7 +4,9 @@ import { HeaderService } from '../header.service';
 import { HeaderState } from '../../../models/header-state.model';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { LoginResponse } from '../../../models/login-response.model';
+
 
 @Component({
   selector: 'app-login-header',
@@ -55,10 +57,10 @@ export class LoginHeaderComponent implements OnInit, OnDestroy {
     this.isPopupOpen = !this.isPopupOpen;
   }
 
-  handleLogin(form: any) {
+  handleLogin(form: NgForm) {
     const { username, password } = form.value;
     this.http
-      .post<any>('/api/admin/login', { username, password })
+      .post<LoginResponse>('/api/admin/login', { username, password })
       .subscribe({
         next: (res) => {
           this.headerService.setLoggedIn(res.user);

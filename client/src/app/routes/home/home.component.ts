@@ -6,6 +6,7 @@ import { HeroSectionComponent } from '../../components/home/hero-section/hero-se
 import { CategoryGridComponent } from '../../components/home/category-grid/category-grid.component';
 import { AboutFindUsComponent } from '../../components/home/about-find-us/about-find-us.component';
 import { Title } from '@angular/platform-browser';
+import { GridProduct } from '../../models/grid-product.model';
 
 @Component({
   standalone: true,
@@ -22,8 +23,8 @@ import { Title } from '@angular/platform-browser';
   ]
 })
 export class HomeComponent implements OnInit {
-  products: any[] = [];
-  trendingProducts: any[] = [];
+  products: GridProduct[] = [];
+  trendingProducts: GridProduct[] = [];
 
   constructor(
     private http: HttpClient,
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Home');
-    this.http.get<any[]>('/api/products').subscribe(data => {
+    this.http.get<GridProduct[]>('/api/products').subscribe(data => {
       this.products = data;
       this.trendingProducts = data
         .filter(p => p.isNew?.toLowerCase() === 'yes')
