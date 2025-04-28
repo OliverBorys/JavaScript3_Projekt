@@ -28,6 +28,10 @@ export class HeaderService {
     this.stateSubject.next({ ...this.state, ...newState });
   }
 
+  getCurrentState(): HeaderState {
+    return this.state;
+  }
+
   setLoggedIn(user: User) {
     localStorage.setItem('adminUser', JSON.stringify(user));
     this.setState({ user, isLoggedIn: true });
