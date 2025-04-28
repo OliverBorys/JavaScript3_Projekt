@@ -22,7 +22,7 @@ export class ProductGridComponent implements OnInit {
   constructor(private headerService: HeaderService, private router: Router) {}
 
   goToProduct(productId: number): void {
-    this.router.navigate(['/products', productId]);
+    this.router.navigate(['/product', productId]);
   }
 
   ngOnInit(): void {
