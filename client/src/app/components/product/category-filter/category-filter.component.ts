@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Category } from '../../../models/category.model';
 
 @Component({
   standalone: true,
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class CategoryFilterComponent {
-  @Input() categories: { id: number; categoryName: string }[] = [];
+  @Input() categories: Category[] = [];
   @Input() selectedCategory: string = '';
   @Output() categoryChange = new EventEmitter<string>();
 
